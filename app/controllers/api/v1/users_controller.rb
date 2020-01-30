@@ -14,6 +14,13 @@ class Api::V1::UsersController < ApplicationController
       render json: { error: 'failed to create user' }, status: :not_acceptable
     end
   end
+
+  def show
+    
+    user = User.find_by(username: params[:username])
+    
+    render json: user.novels
+  end
  
   private
  
