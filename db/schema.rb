@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2020_01_28_191630) do
 
   create_table "novels", force: :cascade do |t|
     t.string "title"
+    t.integer "sprint_count"
+    t.integer "sprint_increment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
