@@ -81,7 +81,12 @@ end
 response[:wordCount] = totalWords
 response[:numberOfUniqueWords] = tempwords.length
 response[:longestWord] = templongestWord
+
+if totalWords != 0
 response[:avgWordLength] = totalCharacters / totalWords
+else
+response[:avgWordLength] = 0
+end
 
   
 
