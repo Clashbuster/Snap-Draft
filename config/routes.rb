@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get '/users/:user/:novel', to: 'users#chapters'
       post '/users/:user/submit-novel', to: 'users#new_novel'
       delete '/users/:user/:novel', to: 'users#delete_novel'
+      get '/users/:user/:novel/stats', to: 'users#stats'
     end
   end
 end
