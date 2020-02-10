@@ -5,7 +5,8 @@ class Api::V1::UsersController < ApplicationController
 
 
   def stats
-    user = User.find_by(username: params[:user])
+    decodedtoken = decoded_token()
+    user = User.find_by(id: decodedtoken[0]["user_id"])
     novel = user.novels.find_by(title: params[:novel])
     chapters = novel.chapters
 
@@ -72,12 +73,8 @@ tempwords = tempwords.sort_by {|_key, value| -value[:full]}.to_h
 response[:numberOfUniqueWords] = tempwords.length
 
 
-top100Words = ["a","all","about","also","and","as","at","be","because","by","can","come","could","day","do","even","find","first","for","from","get","give","go
-","have","he","her","here","him","how","I","if","in","into","it","it","just","know","like","look","make","man","many","me","more","my
-","new","no","not","now","of","on","one","only","or","other","our","out","people","say","see","she","so","some","take","tell","than","that
-","the","their","them","then","there","they","thing","think","this","those","time","to","two","up","use","very","want","way","we","well
-","what","when","which","who","will","with","would","year","you","your"]
-
+top100Words = ["the","of","and","a","to","in","is","you","that","it","he","was","for","on","are","as","with","his","they","i","at","be","this","have","from","or","one","had","by","word","but","not","what","all","were","we","when","your","can","said","there","use","an","each","which","she","do","how","their","if","will","up","other","about","out","many","then","them","these","so","she","some","her","would","make","like","him","into","time","has","look","two","more","write","go","see","number","no","way","could","people","my","than","first","water","been","call","who","oil","its","now","find","long","down","day","did","get", "come", "made", "may", "part"]
+# top100Words = ["", ""]
 
 top100Words.each do |item|
 
@@ -120,7 +117,8 @@ end
 
 
   def delete_novel
-    user = User.find_by(username: params[:user])
+    decodedtoken = decoded_token()
+    user = User.find_by(id: decodedtoken[0]["user_id"])
     novel = user.novels.find_by(title: params[:novel])
     Novel.delete(novel.id)
 
@@ -142,8 +140,9 @@ end
   end
 
   def sprint
-    user = User.find_by(username: params[:user])
-    # puts user
+    decodedtoken = decoded_token()
+    user = User.find_by(id: decodedtoken[0]["user_id"])
+
     novel = user.novels.find_by(title: params[:novel])
     
     if params[:chapter] != ""
@@ -172,15 +171,17 @@ end
   end
 
   def chapters
-    user = User.find_by(username: params[:user])
+    decodedtoken = decoded_token()
+    user = User.find_by(id: decodedtoken[0]["user_id"])
     novel = user.novels.find_by(title: params[:novel])
     chapters = novel.chapters
-
+    
     render json: chapters
   end
 
   def new_novel
-    user = User.find_by(username: params[:user])
+    decodedtoken = decoded_token()
+    user = User.find_by(id: decodedtoken[0]["user_id"])
     novel = user.novels.create(title: params[:title], sprint_increment: params[:sprintIncrement])
     novel.save
     if params[:chapterTitle] != ""

@@ -1,24 +1,5 @@
-# README
+## backend API for snap draft
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This api has no use outside of the functionality with the site snap-draft.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+all of the route are private and require an authorized jwt token.
