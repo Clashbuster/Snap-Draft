@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post '/users/:user/submit-novel', to: 'users#new_novel'
       delete '/users/:user/:novel', to: 'users#delete_novel'
       get '/users/:user/:novel/stats', to: 'users#stats'
+      put '/users/:user/update-novel', to: 'users#update_sprint'
     end
   end
 end

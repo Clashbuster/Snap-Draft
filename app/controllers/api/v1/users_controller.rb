@@ -191,6 +191,17 @@ end
     render json: novel
   end
 
+
+  def update_sprint
+    decodedtoken = decoded_token()
+    user = User.find_by(id: decodedtoken[0]["user_id"])
+    novel = user.novels.find_by(title: params[:novel])
+    novel.sprint_increment = params[:newSprint]
+    novel.save
+
+    render json: novel
+  end
+
   def show
     decodedtoken = decoded_token()
     user = User.find_by(id: decodedtoken[0]["user_id"])
