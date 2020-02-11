@@ -195,11 +195,8 @@ end
     decodedtoken = decoded_token()
     user = User.find_by(id: decodedtoken[0]["user_id"])
 
-    if user.novels
-      response = user.novels
-    else
-      response = {error: "no novels"}
-    end
+    response = user.novels
+    
 
 
 
