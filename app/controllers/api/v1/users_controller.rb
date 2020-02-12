@@ -145,7 +145,11 @@ end
 
     novel = user.novels.find_by(title: params[:novel])
     
-    if params[:chapter] != ""
+    if novel.chapters.find_by(title: params[:chapter])
+    chapter = novel.chapters.find_by(title: params[:chapter])
+    chapter.content += params[:text]
+    chapter.save
+    elsif params[:chapter] != ""
       chapter = novel.chapters.create(title: params[:chapter], content: params[:text])
       chapter.save
     elsif novel.chapters.last == nil
